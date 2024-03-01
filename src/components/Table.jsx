@@ -24,7 +24,7 @@ function Table({ toggleFormHandler, setUpdateData }) {
 	return (
 		<div className="table--wrapper">
 			<header>
-				<h1>Restaurant Items</h1>
+				<h1>Restaurant Menu</h1>
 				<CreateBtn onClickHandler={toggleFormHandler} />
 			</header>
 			<table className="table">

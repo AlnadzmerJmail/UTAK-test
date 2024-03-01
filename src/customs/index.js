@@ -54,10 +54,12 @@ function useFirebase() {
 			const newDocRef = push(ref(db, 'items'));
 
 			// does not return data
-			await set(newDocRef, { ...data });
+			// variation should not be undefined
+			await set(newDocRef, { ...data, variation: data.variation || '' });
 
 			return {};
 		} catch (error) {
+			console.log(error);
 			return { error: 'Saving item went error!' };
 		}
 	};
