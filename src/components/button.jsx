@@ -6,37 +6,38 @@ import { faPlus, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 const buttonIcons = {
 	trash: faTrash,
 	pen: faPen,
+	create: faPlus,
 };
 
 const buttonClassNames = {
+	create: 'create-btn',
 	danger: 'danger-btn',
 	primary: 'primary-btn',
 };
 
-export function CreateBtn({ onClickHandler }) {
-	return (
-		<button onClick={onClickHandler} className="create-btn">
-			<FontAwesomeIcon icon={faPlus} /> Create
-		</button>
-	);
-}
-
-CreateBtn.defaultProps = {
-	onClick: () => alert('You were not passing createBtnHandler'),
-};
-
-export function MyButton({ onClick, type, icon, ml = 0, mr = 0 }) {
+export function MyButton({
+	type,
+	variant,
+	onClick,
+	icon,
+	ml = 0,
+	mr = 0,
+	className = '',
+	label = '',
+}) {
+	const otherProps = type === 'submit' ? {} : { onClick };
 	return (
 		<button
-			onClick={onClick}
-			className={buttonClassNames[type]}
+			type={type || 'button'}
+			className={`${buttonClassNames[variant]} ${className}`}
 			style={{ marginLeft: ml, marginRight: mr }}
+			{...otherProps}
 		>
-			<FontAwesomeIcon icon={buttonIcons[icon]} />
+			{icon && <FontAwesomeIcon icon={buttonIcons[icon]} />} {label}
 		</button>
 	);
 }
 
 MyButton.defaultProps = {
-	onClick: () => alert('You were not passing createBtnHandler'),
+	onClick: () => alert('You were not passing Click Handler!'),
 };

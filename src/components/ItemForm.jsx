@@ -5,11 +5,12 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { useForm } from 'react-hook-form';
 import ItemInput from './ItemInput';
+import { MyButton } from './button';
 
 import useFirebase from '../customs';
 
 export default function ItemForm({
-	defaultValues = {},
+	defaultValues,
 	toggleFormHandler,
 	isFormVisible,
 }) {
@@ -106,7 +107,7 @@ export default function ItemForm({
 	return (
 		<div className={`item__form--wrappper ${!isFormVisible ? 'closed' : ''}`}>
 			<div className="item__form--header">
-				<h3>Create Item</h3>
+				<h3>{defaultValues ? 'Update' : 'Create'} Item</h3>
 				<FontAwesomeIcon
 					icon={faXmark}
 					className="item__close-btn"
@@ -142,10 +143,13 @@ export default function ItemForm({
 				)}
 
 				<div className="item__form--buttons">
-					<button onClick={toggleFormHandler}>Cancel</button>
-					<button type="submit" className="item__submit-btn">
-						Submit
-					</button>
+					<MyButton onClick={toggleFormHandler} label="Cancel" />
+					<MyButton
+						type="submit"
+						label="Submit"
+						className="item__submit-btn"
+						ml={10}
+					/>
 				</div>
 			</form>
 		</div>

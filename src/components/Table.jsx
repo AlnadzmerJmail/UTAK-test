@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { CreateBtn, MyButton } from './button';
+import { MyButton } from './button';
 import useFirebase from '../customs';
 
 function Table({ toggleFormHandler, setUpdateData }) {
@@ -25,7 +25,12 @@ function Table({ toggleFormHandler, setUpdateData }) {
 		<div className="table--wrapper">
 			<header>
 				<h1>Restaurant Menu</h1>
-				<CreateBtn onClickHandler={toggleFormHandler} />
+				<MyButton
+					variant="create"
+					icon="create"
+					label="Create"
+					onClick={toggleFormHandler}
+				/>
 			</header>
 			<table className="table">
 				<thead>
@@ -33,25 +38,25 @@ function Table({ toggleFormHandler, setUpdateData }) {
 						<th>Item Name</th>
 						<th>Category</th>
 						<th>Variation</th>
-						<th>Cost</th>
 						<th>Price</th>
+						<th>Cost</th>
 						<th>Stock</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					{items.map(
-						({ id, name, category, variation, cost, price, stock }) => (
+						({ id, name, category, variation, price, cost, stock }) => (
 							<tr key={id}>
 								<td>{name}</td>
 								<td>{category}</td>
 								<td>{variation}</td>
-								<td>{cost}</td>
 								<td>{price}</td>
+								<td>{cost}</td>
 								<td>{stock}</td>
 								<td>
 									<MyButton
-										type="primary"
+										variant="primary"
 										icon="pen"
 										onClick={() => {
 											toggleFormHandler();
@@ -59,7 +64,7 @@ function Table({ toggleFormHandler, setUpdateData }) {
 										}}
 									/>
 									<MyButton
-										type="danger"
+										variant="danger"
 										icon="trash"
 										ml={10}
 										onClick={() => deleteItemHandler(id)}
